@@ -4,7 +4,7 @@ sudoku: main.o sudoku.o
 main.o: main.cpp sudoku.h
 	g++ -g -c -Wall main.cpp  
 
-sudoku.o: sudoku.o sudoku.h
+sudoku.o: sudoku.cpp sudoku.h
 	g++ -g -c -Wall sudoku.cpp  
 
 clean:
