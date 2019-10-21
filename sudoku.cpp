@@ -76,7 +76,7 @@ bool is_complete(const char board[9][9]){
 
   for(int i = 0; i <9; i++)
     for(int j= 0; j <9; j++)
-      if(board[i][j]=='.')
+      if(static_cast<int>(board[i][j]) < 49 || static_cast<int>(board[i][j]) >57 )
 	return 0;
 
   return 1;
