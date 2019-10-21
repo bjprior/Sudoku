@@ -1,1 +1,15 @@
 Summarise your findings here (see specification).
+
+To identify which was the hardest of the grids I added a function to
+count the calls to the solveboard function, this is outputed above the
+solved grids.
+
+
+Mystery1.dat - grid is the extremely hard grid since using my
+program there is 421547 calls to the solve_board funciton. 
+
+Mystery2.dat - grid is unsolvable, receive a solution cannot be found.
+
+mystery3.dat - grid is hard, the program solves the problem, however
+the calls to the solve_board function is 25667, significantly fewer
+that mystery1.dat. 
