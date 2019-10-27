@@ -1,15 +1,40 @@
 Summarise your findings here (see specification).
 
-To identify which was the hardest of the grids I added a function to
-count the calls to the solveboard function, this is outputed above the
-solved grids.
+For the 3 mystery boards I created a function call test_board. The
+purpose of the function was to solve the board in multiple ways, by
+that I mean starting in different parts of the grid and by starting
+with different numbers. ie test the top left box with 1 first and
+progress from there or to test the bottom right box with 9 first
+and again progress.
 
+From my program it is clear to see that board 2 is unsovable as there
+cannot be a solution found.
 
-Mystery1.dat - grid is the extremely hard grid since using my
-program there is 421547 calls to the solve_board funciton. 
+In order to test the difficulty of the other boards I included a counter in my
+function to count the number of calls to the recursive function. The
+findins I have presented below:
 
-Mystery2.dat - grid is unsolvable, receive a solution cannot be found.
+Number of calls summary to the solver function for the mystery1.dat grid
 
-mystery3.dat - grid is hard, the program solves the problem, however
-the calls to the solve_board function is 25667, significantly fewer
-that mystery1.dat. 
+The average is : 141846
+The min is: 5801
+The max is: 421547
+
+Number of calls summary to the solver function for the mystery3.dat grid
+
+The average is : 127132
+The min is: 10382
+The max is: 324844
+
+I tried to solve the grid in 6 different ways using the same
+algorithm but with different starting parameters. The concept of a
+harder to solve sudoku grid using a program is hard to define as it
+depends on the starting parameters used and the approach the program
+takes.
+
+From the results above and considering just the 6 different ways I
+tried to solve the grid I would be inclined to say that grid 1 was the
+hard grid and grid 3 the very hard grid. I am using the minimum
+calls to make this conclusion: 5801 vs 10382. Since, given the right
+starting parameters, the first grid could be solved with fewer calls
+to the recursive function than the third grid.

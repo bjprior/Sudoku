@@ -159,38 +159,76 @@ bool save_board(const char filename[13],const char board[9][9]){
   return 1;
 }
 
+bool solve_board(char board[9][9]){
+  int digit = 1, row =0, column =0;
+  int counter =0;
+  return solver(board,digit,row,column,counter);
+}
+
+// Test the difficulty of board //
+bool test_board(const char file_name[20]){
+
+  char board[9][9];
+  int test_column = 0, test_row = 0, test_digit =0;
+  int counter =0;
+  int sum =0,min =1000000, max =0;
+  
+  
+  for (test_digit = 1; test_digit < 10; test_digit += 8){
+    for(test_row = 0;test_row<9;test_row +=8){
+      for(test_column = 0; test_column <9; test_column +=8){
+	counter =0;
+	cout << "When starting with number: " << test_digit <<", row: " << static_cast<char>(test_row+65) << " and column: " << test_column+1 << endl;
+    load_board(file_name, board);
+    if (solver(board,test_digit,test_row,test_column,counter) == false){
+      cout << endl << "No solution can be found for this board!" << endl << endl;
+      return 0;
+    }
+    cout << "Solved" << endl;
+    sum += counter;
+    if(counter > max)
+      max = counter;
+    if(counter < min)
+      min = counter;
+      }
+    }
+  }
+    cout << endl << "Number of calls summary to the solver function for the " << file_name <<" grid" << endl << endl;
+    cout << "The average is : " << sum/6 << endl;
+    cout << "The min is: " << min << endl;
+    cout << "The max is: " << max << endl << endl << endl;
+  return 1;
+}  
+
 // function to solve soduku board //
 
-bool solve_board(char board[9][9]){
+  bool solver(char board[9][9],int digit1, int row1, int column1, int &counter){
 
   char position [2];
   char *ptr = &board[8][8];
+  counter++;
 
-  static int recursive_calls = 0;
-  recursive_calls ++;
 
   /* The outputs the number of calls to the function and resets counter to 0 when printed */
   
-  if(is_complete(board)){
-    cout << endl << "total calls: " << recursive_calls << endl <<endl; 
-    recursive_calls = 0;
+  if(is_complete(board))
     return true;
-  }
   
-  for (int i =0; i <9; i++){                       //rows
-    for (int j=0; j<9;j++){                       //columns   
-      for (int digit= 1; digit < 10; digit++){
+  
+  for (int i = row1; (row1==0)?i<9:i>-1;(row1==0)?i++:i--){                       //rows
+    for (int j = column1;(column1==0)?j < 9:j>-1;(column1==0)?j++:j--){                       //columns   
+      for (int k = digit1;(digit1==1)?k < 10:k>0; (digit1==1)?k++:k--){
 	position[0] = static_cast<char>(i+65);
 	position[1] = static_cast<char>(j+49);
-	if(make_move(position,static_cast<char>(digit+48),board)){
-	  if (solve_board(board))
+	if(make_move(position,static_cast<char>(k+48),board)){
+	  if (solver(board,digit1,row1,column1,counter))
 	    return true;
 	  else{
 	    ptr = &board[i][j];
 	    *ptr= '.';
 	  }
 	}
-	if(digit ==9 && board[i][j]== '.')
+	if(((digit1 ==1)?k ==9:k==1) && board[i][j]== '.')
 	  return false;
       }
     }
